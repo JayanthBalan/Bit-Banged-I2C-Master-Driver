@@ -1,1 +1,1 @@
-# GPIO-Bit-Banged-I-C-Driver
+# GPIO-Bit-Banged-I2C-Driver
