@@ -28,9 +28,6 @@ static IRAM_ATTR inline void _delay_cy (uint32_t cycles)
     uint32_t t = esp_cpu_get_cycle_count();
     while ((esp_cpu_get_cycle_count() - t) < cycles) {}
 }
- 
-#define _HALF_DLY(d) _delay_cy((d) -> half_period_cy)
-#define _QUARTER_DLY(d) _delay_cy((d) -> quarter_period_cy)
 
 // Clock Stretch
 static IRAM_ATTR bool _scl_wait(const i2c_master_bb_t *dev)
@@ -50,33 +47,33 @@ static IRAM_ATTR void _start (const i2c_master_bb_t *dev) // Start Bit
 {
     _PIN_HIGH(dev -> sda);
     _PIN_HIGH(dev -> scl);
-    _HALF_DLY(dev);
+    _delay_cy((dev) -> half_period_cy);
     _PIN_LOW(dev -> sda);
-    _HALF_DLY(dev);
+    _delay_cy((dev) -> half_period_cy);
     _PIN_LOW(dev -> scl);
-    _QUARTER_DLY(dev);
+    _delay_cy((dev) -> quarter_period_cy);
 }
 
 static IRAM_ATTR void _repeated_start (const i2c_master_bb_t *dev) // Repeated Start Bit
 {
     _PIN_HIGH(dev -> sda);
-    _QUARTER_DLY(dev);
+    _delay_cy((dev) -> quarter_period_cy);
     _PIN_HIGH(dev -> scl);
-    _HALF_DLY(dev);
+    _delay_cy((dev) -> half_period_cy);
     _PIN_LOW(dev -> sda);
-    _HALF_DLY(dev);
+    _delay_cy((dev) -> half_period_cy);
     _PIN_LOW(dev -> scl);
-    _QUARTER_DLY(dev);
+    _delay_cy((dev) -> quarter_period_cy);
 }
 
 static IRAM_ATTR void _stop (const i2c_master_bb_t *dev) // Stop Bit
 {
     _PIN_LOW(dev -> sda);
-    _QUARTER_DLY(dev);
+    _delay_cy((dev) -> quarter_period_cy);
     _PIN_HIGH(dev -> scl);
-    _HALF_DLY(dev);
+    _delay_cy((dev) -> half_period_cy);
     _PIN_HIGH(dev -> sda);
-    _HALF_DLY(dev);
+    _delay_cy((dev) -> half_period_cy);
 }
 
 static IRAM_ATTR bool _write_bit (const i2c_master_bb_t *dev, uint8_t bit) // Frame Bit Write
@@ -88,7 +85,7 @@ static IRAM_ATTR bool _write_bit (const i2c_master_bb_t *dev, uint8_t bit) // Fr
         _PIN_LOW(dev -> sda);
     }
  
-    _QUARTER_DLY(dev);
+    _delay_cy((dev) -> quarter_period_cy);
     _PIN_HIGH(dev -> scl);
 
     // Clock Stretching Check
@@ -96,39 +93,39 @@ static IRAM_ATTR bool _write_bit (const i2c_master_bb_t *dev, uint8_t bit) // Fr
         return false;
     }
 
-    _QUARTER_DLY(dev);
+    _delay_cy((dev) -> quarter_period_cy);
     if (bit && !_PIN_READ(dev -> sda)) { // Arbitration
         return false;
     }
  
-    _QUARTER_DLY(dev);
+    _delay_cy((dev) -> quarter_period_cy);
     _PIN_LOW(dev -> scl);
-    _QUARTER_DLY(dev);
+    _delay_cy((dev) -> quarter_period_cy);
  
     return true;
 }
 
-static IRAM_ATTR uint8_t _read_bit (const i2c_master_bb_t *dev) // Frame Bit Read
+static IRAM_ATTR int _read_bit (const i2c_master_bb_t *dev) // Frame Bit Read
 {
     _PIN_HIGH(dev -> sda);
-    _QUARTER_DLY(dev);
+    _delay_cy((dev) -> quarter_period_cy);
  
     _PIN_HIGH(dev -> scl);
 
     // Clock Stretching Check
     if (!_scl_wait(dev)) {
-        return 0;
+        return -1;
     }
 
-    _QUARTER_DLY(dev);
+    _delay_cy((dev) -> quarter_period_cy);
 
     uint8_t bit = (uint8_t)_PIN_READ(dev -> sda);
 
-    _QUARTER_DLY(dev);
+    _delay_cy((dev) -> quarter_period_cy);
     _PIN_LOW(dev -> scl);
-    _QUARTER_DLY(dev);
+    _delay_cy((dev) -> quarter_period_cy);
  
-    return ((bit << 1) | 1);
+    return bit;
 }
 
 static IRAM_ATTR int8_t _write_byte (const i2c_master_bb_t *dev, uint8_t byte) // Frame Byte Write
@@ -141,11 +138,16 @@ static IRAM_ATTR int8_t _write_byte (const i2c_master_bb_t *dev, uint8_t byte) /
     return _read_bit(dev);
 }
 
-static IRAM_ATTR uint8_t _read_byte (const i2c_master_bb_t *dev, bool send_ack) // Frame Byte Read
+static IRAM_ATTR int16_t _read_byte (const i2c_master_bb_t *dev, bool send_ack) // Frame Byte Read
 {
     uint8_t byte = 0;
+    int bit;
     for (int8_t i = 7; i >= 0; i--) {
-        byte = (uint8_t)((byte << 1u) | _read_bit(dev));
+        bit = _read_bit(dev);
+        if (bit < 0) {
+            return -1;
+        }
+        byte = (uint8_t)((byte << 1u) | bit);
     }
     _write_bit(dev, (send_ack ? 0u : 1u));
     return byte;
@@ -206,7 +208,7 @@ esp_err_t i2c_master_deinit (i2c_master_bb_t *dev) // De-Initialize I2C
     return ESP_OK;
 }
 
-esp_err_t i2c_master_wr (i2c_master_bb_t *dev, uint8_t addr, const uint8_t *data, size_t len, bool stop) // Write Frame
+esp_err_t i2c_master_wr (i2c_master_bb_t *dev, uint8_t addr, const uint8_t *data, size_t len) // Write Frame
 {
     // Constraints
     if (!dev || !dev -> initialize) {
@@ -227,31 +229,29 @@ esp_err_t i2c_master_wr (i2c_master_bb_t *dev, uint8_t addr, const uint8_t *data
     int8_t ack = _write_byte(dev, (uint8_t)((addr << 1u) | 0u));
     if (ack < 0) {
         ret = ESP_ERR_INVALID_STATE;
-        goto no_stop;
+        goto no_stop_wr;
     }
     if (ack > 0) {
         ret = ESP_ERR_INVALID_RESPONSE;
-        goto done;
+        goto stop_wr;
     }
  
     for (size_t i = 0; i < len; i++) {
         ack = _write_byte(dev, data[i]);
         if (ack < 0) {
             ret = ESP_ERR_INVALID_STATE;
-            goto no_stop;
+            goto no_stop_wr;
         }
         if (ack > 0) {
             ret = ESP_ERR_INVALID_RESPONSE;
-            goto done;
+            goto stop_wr;
         }
     }
  
-done:
-    if (stop) {
-        _stop(dev);
-    }
+stop_wr:
+    _stop(dev);
 
-no_stop:
+no_stop_wr:
     portEXIT_CRITICAL(&dev -> spinlock);
     xTaskResumeAll();
     // Frame End
@@ -259,7 +259,7 @@ no_stop:
     return ret;
 }
 
-esp_err_t i2c_master_rd (i2c_master_bb_t *dev, uint8_t addr, uint8_t *data, size_t len, bool stop) // Read Frame
+esp_err_t i2c_master_rd (i2c_master_bb_t *dev, uint8_t addr, uint8_t *data, size_t len) // Read Frame
 {
     // Constraints
     if (!dev || !dev -> initialize) {
@@ -281,23 +281,26 @@ esp_err_t i2c_master_rd (i2c_master_bb_t *dev, uint8_t addr, uint8_t *data, size
     int8_t ack = _write_byte(dev, (uint8_t)((addr << 1u) | 1u));
     if (ack < 0) {
         ret = ESP_ERR_INVALID_STATE;
-        goto no_stop;
+        goto no_stop_rd;
     }
     if (ack > 0) {
         ret = ESP_ERR_INVALID_RESPONSE;
-        goto done;
+        goto stop_rd;
     }
  
     for (size_t i = 0; i < len; i++) {
-        data[i] = _read_byte(dev, i < len - 1U);
+        int16_t byte = _read_byte(dev, i < len - 1U);
+        if (byte < 0) {
+            ret = ESP_ERR_TIMEOUT;
+            goto stop_rd;
+        }
+        data[i] = (uint8_t)(byte & 0xFF);
     }
  
-done:
-    if (stop) {
-        _stop(dev);
-    }
+stop_rd:
+    _stop(dev);
 
-no_stop:
+no_stop_rd:
     portEXIT_CRITICAL(&dev -> spinlock);
     xTaskResumeAll();
     // Frame End
@@ -329,22 +332,22 @@ esp_err_t i2c_master_wr_rd (i2c_master_bb_t *dev, uint8_t addr, const uint8_t *w
     int8_t ack = _write_byte(dev, (uint8_t)((addr << 1u) | 0u));
     if (ack < 0) {
         ret = ESP_ERR_INVALID_STATE;
-        goto no_stop;
+        goto no_stop_rw;
     }
     if (ack > 0) {
         ret = ESP_ERR_INVALID_RESPONSE;
-        goto stop;
+        goto stop_rw;
     }
  
     for (size_t i = 0; i < wlen; i++) {
         ack = _write_byte(dev, wdata[i]);
         if (ack < 0) {
             ret = ESP_ERR_INVALID_STATE;
-            goto no_stop;
+            goto no_stop_rw;
         }
         if (ack > 0) {
             ret = ESP_ERR_INVALID_RESPONSE;
-            goto stop;
+            goto stop_rw;
         }
     }
 
@@ -353,21 +356,26 @@ esp_err_t i2c_master_wr_rd (i2c_master_bb_t *dev, uint8_t addr, const uint8_t *w
     ack = _write_byte(dev, (uint8_t)((addr << 1u) | 1u));
     if (ack < 0) {
         ret = ESP_ERR_INVALID_STATE;
-        goto no_stop;
+        goto no_stop_rw;
     }
     if (ack > 0) {
         ret = ESP_ERR_INVALID_RESPONSE;
-        goto stop;
+        goto stop_rw;
     }
  
     for (size_t i = 0; i < rlen; i++) {
-        rdata[i] = _read_byte(dev, i < rlen - 1U);
+        int16_t byte = _read_byte(dev, i < rlen - 1U);
+        if (byte < 0) {
+            ret = ESP_ERR_TIMEOUT;
+            goto stop_rw;
+        }
+        rdata[i] = (uint8_t)(byte & 0xFF);
     }
  
-stop:
+stop_rw:
     _stop(dev);
 
-no_stop:
+no_stop_rw:
     portEXIT_CRITICAL(&dev -> spinlock);
     xTaskResumeAll();
     // Frame End
@@ -398,7 +406,7 @@ esp_err_t i2c_master_bus_recover (i2c_master_bb_t *dev) // Bus Takeover
  
     _PIN_HIGH(dev -> sda);
     _PIN_HIGH(dev -> scl);
-    _HALF_DLY(dev);
+    _delay_cy((dev) -> half_period_cy);
  
     for (uint8_t i = 0; i < I2C_MASTER_BUS_CLR_PULSES; i++) {
         if (_PIN_READ(dev -> sda)) {
@@ -406,9 +414,9 @@ esp_err_t i2c_master_bus_recover (i2c_master_bb_t *dev) // Bus Takeover
         }
 
         _PIN_LOW(dev -> scl);
-        _HALF_DLY(dev);
+        _delay_cy((dev) -> half_period_cy);
         _PIN_HIGH(dev -> scl);
-        _HALF_DLY(dev);
+        _delay_cy((dev) -> half_period_cy);
     }
 
     _stop(dev);

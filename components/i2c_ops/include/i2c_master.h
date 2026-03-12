@@ -31,20 +31,20 @@ typedef struct {
 } i2c_master_bb_t;
 
 /*
-return : i2c_master_wr, i2c_master_rd, i2c_master_wr_rd
+function return values : i2c_master_wr, i2c_master_rd, i2c_master_wr_rd, i2c_master_bus_recover
 Slave NACKed = ESP_ERR_INVALID_RESPONSE
 Arb lost = ESP_ERR_INVALID_STATE
 CLK stretch = ESP_ERR_TIMEOUT
 SDA stuck low = ESP_ERR_NOT_FOUND
 */
 
-//API
+// API
 esp_err_t i2c_master_init(i2c_master_bb_t*, gpio_num_t, gpio_num_t, uint32_t);
 esp_err_t i2c_master_deinit(i2c_master_bb_t*);
-esp_err_t i2c_master_wr(i2c_master_bb_t*, uint8_t, const uint8_t*, size_t, bool);
-esp_err_t i2c_master_rd(i2c_master_bb_t*, uint8_t, uint8_t*, size_t, bool);
+esp_err_t i2c_master_wr(i2c_master_bb_t*, uint8_t, const uint8_t*, size_t);
+esp_err_t i2c_master_rd(i2c_master_bb_t*, uint8_t, uint8_t*, size_t);
 esp_err_t i2c_master_wr_rd(i2c_master_bb_t*, uint8_t, const uint8_t*, size_t, uint8_t*, size_t);
-bool i2c_master_bus_check(i2c_master_bb_t*);
 esp_err_t i2c_master_bus_recover(i2c_master_bb_t*);
+bool i2c_master_bus_check(i2c_master_bb_t*);
 
 #endif
