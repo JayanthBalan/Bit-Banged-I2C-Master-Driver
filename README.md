@@ -1,4 +1,4 @@
-# ESP32 Bit-Banged I2C Master Driver
+# Bit-Banged I2C Master Driver
 
 A fully software-driven I2C master implementation for the ESP32 (ESP-WROOM-32), written in Embedded C using the ESP-IDF framework. Rather than using the ESP32's built-in I2C peripheral, this driver manually controls GPIO lines through direct register writes — giving complete visibility and control over every bit on the bus.
 
