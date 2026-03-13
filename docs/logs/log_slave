@@ -1,0 +1,151 @@
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6280
+load:0x40078000,len:15864
+load:0x40080400,len:3920
+--- 0x40080400: _invalid_pc_placeholder at C:/esp/v5.5.3/esp-idf/components/xtensa/xtensa_vectors.S:2235
+entry 0x40080644
+I (27) boot: ESP-IDF v5.5.3 2nd stage bootloader
+I (27) boot: compile time Mar 13 2026 12:57:05
+I (28) boot: Multicore bootloader
+I (29) boot: chip revision: v3.1
+I (32) boot.esp32: SPI Speed      : 40MHz
+I (35) boot.esp32: SPI Mode       : DIO
+I (39) boot.esp32: SPI Flash Size : 2MB
+I (42) boot: Enabling RNG early entropy source...
+I (47) boot: Partition Table:
+I (49) boot: ## Label            Usage          Type ST Offset   Length
+I (56) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (62) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+I (69) boot:  2 factory          factory app      00 00 00010000 00100000
+I (75) boot: End of partition table
+I (79) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=0a6bch ( 42684) map
+I (101) esp_image: segment 1: paddr=0001a6e4 vaddr=3ffb0000 size=02864h ( 10340) load
+I (105) esp_image: segment 2: paddr=0001cf50 vaddr=40080000 size=030c8h ( 12488) load
+I (110) esp_image: segment 3: paddr=00020020 vaddr=400d0020 size=10ef4h ( 69364) map
+I (136) esp_image: segment 4: paddr=00030f1c vaddr=400830c8 size=0b22ch ( 45612) load
+I (154) esp_image: segment 5: paddr=0003c150 vaddr=50000000 size=00020h (    32) load
+I (161) boot: Loaded app from partition at offset 0x10000
+I (161) boot: Disabling RNG early entropy source...
+I (172) cpu_start: Multicore app
+I (180) cpu_start: GPIO 3 and 1 are used as console UART I/O pins
+I (180) cpu_start: Pro cpu start user code
+I (181) cpu_start: cpu freq: 160000000 Hz
+I (182) app_init: Application information:
+I (186) app_init: Project name:     _TransparentWorld_
+I (191) app_init: App version:      1
+I (194) app_init: Compile time:     Mar 13 2026 12:56:02
+I (199) app_init: ELF file SHA256:  1dc1a2800...
+I (204) app_init: ESP-IDF:          v5.5.3
+I (208) efuse_init: Min chip rev:     v0.0
+I (211) efuse_init: Max chip rev:     v3.99 
+I (215) efuse_init: Chip rev:         v3.1
+I (220) heap_init: Initializing. RAM available for dynamic allocation:
+I (226) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM
+I (231) heap_init: At 3FFB3138 len 0002CEC8 (179 KiB): DRAM
+I (236) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM
+I (241) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM
+I (247) heap_init: At 4008E2F4 len 00011D0C (71 KiB): IRAM
+W (253) spi_flash: Detected boya flash chip but using generic driver. For optimal functionality, enable `SPI_FLASH_SUPPORT_BOYA_CHIP` in menuconfig
+I (265) spi_flash: detected chip: generic
+I (269) spi_flash: flash io: dio
+W (272) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.
+W (284) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`   
+I (294) main_task: Started on CPU0
+I (304) main_task: Calling app_main()
+I (304) main: I2C slave driver installed on port 0
+I (304) main: Slave ready : addr=0x71  SDA=21  SCL=22
+I (304) main: TX Buffer Preloaded
+I (304) main_task: Returned from app_main()
+I (47324) main: Received 7 byte(s):
+I (47324) main: >>>rx[0] = 0xA1
+I (47324) main: >>>rx[1] = 0xB2
+I (47324) main: >>>rx[2] = 0xC3
+I (47324) main: >>>rx[3] = 0xD4
+I (47324) main: >>>rx[4] = 0xE5
+I (47324) main: >>>rx[5] = 0xF6
+I (47324) main: >>>rx[6] = 0x00
+I (47414) main: Received 7 byte(s):
+I (47414) main: >>>rx[0] = 0xA1
+I (47414) main: >>>rx[1] = 0xB2
+I (47414) main: >>>rx[2] = 0xC3
+I (47414) main: >>>rx[3] = 0xD4
+I (47424) main: >>>rx[4] = 0xE5
+I (47424) main: >>>rx[5] = 0xF6
+I (47424) main: >>>rx[6] = 0x00
+I (47534) main: Received 7 byte(s):
+I (47534) main: >>>rx[0] = 0xA1
+I (47534) main: >>>rx[1] = 0xB2
+I (47534) main: >>>rx[2] = 0xC3
+I (47534) main: >>>rx[3] = 0xD4
+I (47534) main: >>>rx[4] = 0xE5
+I (47534) main: >>>rx[5] = 0xF6
+I (47534) main: >>>rx[6] = 0x00
+I (47624) main: Received 7 byte(s):
+I (47624) main: >>>rx[0] = 0xA1
+I (47624) main: >>>rx[1] = 0xB2
+I (47624) main: >>>rx[2] = 0xC3
+I (47624) main: >>>rx[3] = 0xD4
+I (47634) main: >>>rx[4] = 0xE5
+I (47634) main: >>>rx[5] = 0xF6
+I (47634) main: >>>rx[6] = 0x00
+I (47744) main: Received 7 byte(s):
+I (47744) main: >>>rx[0] = 0xA1
+I (47744) main: >>>rx[1] = 0xB2
+I (47744) main: >>>rx[2] = 0xC3
+I (47744) main: >>>rx[3] = 0xD4
+I (47744) main: >>>rx[4] = 0xE5
+I (47744) main: >>>rx[5] = 0xF6
+I (47744) main: >>>rx[6] = 0x00
+I (47834) main: Received 7 byte(s):
+I (47834) main: >>>rx[0] = 0xA1
+I (47834) main: >>>rx[1] = 0xB2
+I (47834) main: >>>rx[2] = 0xC3
+I (47834) main: >>>rx[3] = 0xD4
+I (47844) main: >>>rx[4] = 0xE5
+I (47844) main: >>>rx[5] = 0xF6
+I (47844) main: >>>rx[6] = 0x00
+I (47954) main: Received 7 byte(s):
+I (47954) main: >>>rx[0] = 0xA1
+I (47954) main: >>>rx[1] = 0xB2
+I (47954) main: >>>rx[2] = 0xC3
+I (47954) main: >>>rx[3] = 0xD4
+I (47954) main: >>>rx[4] = 0xE5
+I (47954) main: >>>rx[5] = 0xF6
+I (47954) main: >>>rx[6] = 0x00
+I (48044) main: Received 7 byte(s):
+I (48044) main: >>>rx[0] = 0xA1
+I (48044) main: >>>rx[1] = 0xB2
+I (48044) main: >>>rx[2] = 0xC3
+I (48044) main: >>>rx[3] = 0xD4
+I (48054) main: >>>rx[4] = 0xE5
+I (48054) main: >>>rx[5] = 0xF6
+I (48054) main: >>>rx[6] = 0x00
+I (48164) main: Received 7 byte(s):
+I (48164) main: >>>rx[0] = 0xA1
+I (48164) main: >>>rx[1] = 0xB2
+I (48164) main: >>>rx[2] = 0xC3
+I (48164) main: >>>rx[3] = 0xD4
+I (48164) main: >>>rx[4] = 0xE5
+I (48164) main: >>>rx[5] = 0xF6
+I (48164) main: >>>rx[6] = 0x00
+I (48254) main: Received 7 byte(s):
+I (48254) main: >>>rx[0] = 0xA1
+I (48254) main: >>>rx[1] = 0xB2
+I (48254) main: >>>rx[2] = 0xC3
+I (48254) main: >>>rx[3] = 0xD4
+I (48264) main: >>>rx[4] = 0xE5
+I (48264) main: >>>rx[5] = 0xF6
+I (48264) main: >>>rx[6] = 0x00
+I (48374) main: Received 7 byte(s):
+I (48374) main: >>>rx[0] = 0xA1
+I (48374) main: >>>rx[1] = 0xB2
+I (48374) main: >>>rx[2] = 0xC3
+I (48374) main: >>>rx[3] = 0xD4
+I (48374) main: >>>rx[4] = 0xE5
+I (48374) main: >>>rx[5] = 0xF6
+I (48374) main: >>>rx[6] = 0x00
