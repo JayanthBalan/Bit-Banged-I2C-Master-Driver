@@ -19,9 +19,9 @@ static void test_task (void *pvParameters)
 
     i2c_master_bb_t bus_i2c;
     gpio_num_t sda = 13, scl = 18;
-    ESP_ERROR_CHECK(i2c_master_init(&bus_i2c, sda, scl, 100000));
+    ESP_ERROR_CHECK(i2c_master_init(&bus_i2c, sda, scl, 400000)); // Fast Mode : 400 KHz
     ESP_LOGI(TAG, "Initialized");
-    vTaskDelay(pdMS_TO_TICKS(10));
+    vTaskDelay(pdMS_TO_TICKS(75));
 
     esp_err_t err;
     while (1) {        
@@ -32,7 +32,7 @@ static void test_task (void *pvParameters)
         else {
             ESP_LOGE(TAG, "Transmission Error: %s", esp_err_to_name(err));
         }
-        vTaskDelay(pdMS_TO_TICKS(10));
+        vTaskDelay(pdMS_TO_TICKS(75));
 
         err = i2c_master_rd(&bus_i2c, slave_address, read_dat, 5);
         if (err == ESP_OK) {
@@ -41,15 +41,15 @@ static void test_task (void *pvParameters)
         else {
             ESP_LOGE(TAG, "Reception Error: %s", esp_err_to_name(err));
         }
-        vTaskDelay(pdMS_TO_TICKS(10));
+        vTaskDelay(pdMS_TO_TICKS(75));
 
         err = i2c_master_wr_rd(&bus_i2c, slave_address, write_dat, 7, read_dat, 5);
         if (err == ESP_OK) {
-            ESP_LOGI(TAG, "Transmitted Write Data\nReceived Read Data : %02X %02X %02X %02X %02X", read_dat[0], read_dat[1], read_dat[2], read_dat[3], read_dat[4]);
+            ESP_LOGI(TAG, "Transmitted Write Data and Received Read Data : %02X %02X %02X %02X %02X", read_dat[0], read_dat[1], read_dat[2], read_dat[3], read_dat[4]);
         }
         else {
             ESP_LOGE(TAG, "Tx/Rx Error: %s", esp_err_to_name(err));
         }
-        vTaskDelay(pdMS_TO_TICKS(10));
+        vTaskDelay(pdMS_TO_TICKS(75));
     }
 }
