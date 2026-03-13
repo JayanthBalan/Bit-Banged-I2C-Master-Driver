@@ -15,7 +15,7 @@ void app_main(void)
 static void test_task (void *pvParameters)
 {
     uint8_t read_dat[5], write_dat[7] = {0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6, 0x00};
-    uint8_t slave_address = 0xE2 >> 1u;
+    uint8_t slave_address = 0x71;
 
     i2c_master_bb_t bus_i2c;
     gpio_num_t sda = 13, scl = 18;
