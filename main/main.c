@@ -18,7 +18,7 @@ static void test_task (void *pvParameters)
     uint8_t slave_address = 0xE2 >> 1u;
 
     i2c_master_bb_t bus_i2c;
-    gpio_num_t sda = 13, scl = 24;
+    gpio_num_t sda = 13, scl = 18;
     ESP_ERROR_CHECK(i2c_master_init(&bus_i2c, sda, scl, 100000));
     ESP_LOGI(TAG, "Initialized");
     vTaskDelay(pdMS_TO_TICKS(10));
