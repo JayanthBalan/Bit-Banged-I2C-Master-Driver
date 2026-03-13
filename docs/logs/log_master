@@ -1,0 +1,283 @@
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6280
+load:0x40078000,len:15864
+load:0x40080400,len:3920
+--- 0x40080400: _invalid_pc_placeholder at C:/esp/v5.5.3/esp-idf/components/xtensa/xtensa_vectors.S:2235
+entry 0x40080644
+I (27) boot: ESP-IDF v5.5.3 2nd stage bootloader
+I (27) boot: compile time Mar 12 2026 10:56:50
+I (27) boot: Multicore bootloader
+I (29) boot: chip revision: v3.1
+I (32) boot.esp32: SPI Speed      : 40MHz
+I (35) boot.esp32: SPI Mode       : DIO
+I (39) boot.esp32: SPI Flash Size : 2MB
+I (42) boot: Enabling RNG early entropy source...
+I (47) boot: Partition Table:
+I (49) boot: ## Label            Usage          Type ST Offset   Length
+I (56) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (62) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+I (69) boot:  2 factory          factory app      00 00 00010000 00100000
+I (75) boot: End of partition table
+I (79) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=09998h ( 39320) map
+I (100) esp_image: segment 1: paddr=000199c0 vaddr=3ffb0000 size=02834h ( 10292) load
+I (104) esp_image: segment 2: paddr=0001c1fc vaddr=40080000 size=03e1ch ( 15900) load
+I (110) esp_image: segment 3: paddr=00020020 vaddr=400d0020 size=105b8h ( 67000) map
+I (134) esp_image: segment 4: paddr=000305e0 vaddr=40083e1c size=096dch ( 38620) load
+I (149) esp_image: segment 5: paddr=00039cc4 vaddr=50000000 size=00020h (    32) load
+I (156) boot: Loaded app from partition at offset 0x10000
+I (156) boot: Disabling RNG early entropy source...
+I (167) cpu_start: Multicore app
+I (176) cpu_start: GPIO 3 and 1 are used as console UART I/O pins
+I (176) cpu_start: Pro cpu start user code
+I (176) cpu_start: cpu freq: 160000000 Hz
+I (178) app_init: Application information:
+I (182) app_init: Project name:     TransparentWorld
+I (186) app_init: App version:      f7810e6-dirty
+I (191) app_init: Compile time:     Mar 13 2026 16:23:40
+I (196) app_init: ELF file SHA256:  9b1aa6d79...
+I (200) app_init: ESP-IDF:          v5.5.3
+I (204) efuse_init: Min chip rev:     v0.0
+I (208) efuse_init: Max chip rev:     v3.99 
+I (212) efuse_init: Chip rev:         v3.1
+I (216) heap_init: Initializing. RAM available for dynamic allocation:
+I (222) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM
+I (227) heap_init: At 3FFB3100 len 0002CF00 (179 KiB): DRAM
+I (232) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM
+I (238) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM
+I (243) heap_init: At 4008D4F8 len 00012B08 (74 KiB): IRAM
+W (250) spi_flash: Detected boya flash chip but using generic driver. For optimal functionality, enable `SPI_FLASH_SUPPORT_BOYA_CHIP` in menuconfig
+I (261) spi_flash: detected chip: generic
+I (265) spi_flash: flash io: dio
+W (268) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.
+I (281) main_task: Started on CPU0
+I (291) main_task: Calling app_main()
+I (2291) bb_i2c_master: Parameters: SDA = 13; SCL = 18; speed = 400000 kHz; half = 200 cy; CPU = 160 MHz;
+I (2291) main: Initialized
+I (2291) main_task: Returned from app_main()
+I (2361) main: Transmitted Write Data
+I (2431) main: Received Read Data : 11 22 33 44 55
+I (2501) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (2571) main: Transmitted Write Data
+I (2641) main: Received Read Data : 11 22 33 44 55
+I (2711) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (2781) main: Transmitted Write Data
+I (2851) main: Received Read Data : 11 22 33 44 55
+I (2921) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (2991) main: Transmitted Write Data
+I (3061) main: Received Read Data : 11 22 33 44 55
+I (3131) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (3201) main: Transmitted Write Data
+I (3271) main: Received Read Data : 11 22 33 44 55
+I (3341) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (3411) main: Transmitted Write Data
+I (3481) main: Received Read Data : 11 22 33 44 55
+I (3551) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (3621) main: Transmitted Write Data
+I (3691) main: Received Read Data : 11 22 33 44 55
+I (3761) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (3831) main: Transmitted Write Data
+I (3901) main: Received Read Data : 11 22 33 44 55
+I (3971) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (4041) main: Transmitted Write Data
+I (4111) main: Received Read Data : 11 22 33 44 55
+I (4181) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (4251) main: Transmitted Write Data
+I (4321) main: Received Read Data : 11 22 33 44 55
+I (4391) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (4461) main: Transmitted Write Data
+I (4531) main: Received Read Data : 11 22 33 44 55
+I (4601) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (4671) main: Transmitted Write Data
+I (4741) main: Received Read Data : 11 22 33 44 55
+I (4811) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (4881) main: Transmitted Write Data
+I (4951) main: Received Read Data : 11 22 33 44 55
+I (5021) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (5091) main: Transmitted Write Data
+I (5161) main: Received Read Data : 11 22 33 44 55
+I (5231) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (5301) main: Transmitted Write Data
+I (5371) main: Received Read Data : 11 22 33 44 55
+I (5441) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (5511) main: Transmitted Write Data
+I (5581) main: Received Read Data : 11 22 33 44 55
+I (5651) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (5721) main: Transmitted Write Data
+I (5791) main: Received Read Data : 11 22 33 44 55
+I (5861) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (5931) main: Transmitted Write Data
+I (6001) main: Received Read Data : 11 22 33 44 55
+I (6071) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (6141) main: Transmitted Write Data
+I (6211) main: Received Read Data : 11 22 33 44 55
+I (6281) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (6351) main: Transmitted Write Data
+I (6421) main: Received Read Data : 11 22 33 44 55
+I (6491) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (6561) main: Transmitted Write Data
+I (6631) main: Received Read Data : 11 22 33 44 55
+I (6701) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (6771) main: Transmitted Write Data
+I (6841) main: Received Read Data : 11 22 33 44 55
+I (6911) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (6981) main: Transmitted Write Data
+I (7051) main: Received Read Data : 11 22 33 44 55
+I (7121) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (7191) main: Transmitted Write Data
+I (7261) main: Received Read Data : 11 22 33 44 55
+I (7331) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (7401) main: Transmitted Write Data
+I (7471) main: Received Read Data : 11 22 33 44 55
+I (7541) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (7611) main: Transmitted Write Data
+I (7681) main: Received Read Data : 11 22 33 44 55
+I (7751) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (7821) main: Transmitted Write Data
+I (7891) main: Received Read Data : 11 22 33 44 55
+I (7961) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (8031) main: Transmitted Write Data
+I (8101) main: Received Read Data : 11 22 33 44 55
+I (8171) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (8241) main: Transmitted Write Data
+I (8311) main: Received Read Data : 11 22 33 44 55
+I (8381) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (8451) main: Transmitted Write Data
+I (8521) main: Received Read Data : 11 22 33 44 55
+I (8591) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (8661) main: Transmitted Write Data
+I (8731) main: Received Read Data : 11 22 33 44 55
+I (8801) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (8871) main: Transmitted Write Data
+I (8941) main: Received Read Data : 11 22 33 44 55
+I (9011) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (9081) main: Transmitted Write Data
+I (9151) main: Received Read Data : 11 22 33 44 55
+I (9221) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (9291) main: Transmitted Write Data
+I (9361) main: Received Read Data : 11 22 33 44 55
+I (9431) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (9501) main: Transmitted Write Data
+I (9571) main: Received Read Data : 11 22 33 44 55
+I (9641) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (9711) main: Transmitted Write Data
+I (9781) main: Received Read Data : 11 22 33 44 55
+I (9851) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (9921) main: Transmitted Write Data
+I (9991) main: Received Read Data : 11 22 33 44 55
+I (10061) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (10131) main: Transmitted Write Data
+I (10201) main: Received Read Data : 11 22 33 44 55
+I (10271) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (10341) main: Transmitted Write Data
+I (10411) main: Received Read Data : 11 22 33 44 55
+I (10481) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (10551) main: Transmitted Write Data
+I (10621) main: Received Read Data : 11 22 33 44 55
+I (10691) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (10761) main: Transmitted Write Data
+I (10831) main: Received Read Data : 11 22 33 44 55
+I (10901) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (10971) main: Transmitted Write Data
+I (11041) main: Received Read Data : 11 22 33 44 55
+I (11111) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (11181) main: Transmitted Write Data
+I (11251) main: Received Read Data : 11 22 33 44 55
+I (11321) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (11391) main: Transmitted Write Data
+I (11461) main: Received Read Data : 11 22 33 44 55
+I (11531) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (11601) main: Transmitted Write Data
+I (11671) main: Received Read Data : 11 22 33 44 55
+I (11741) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (11811) main: Transmitted Write Data
+I (11881) main: Received Read Data : 11 22 33 44 55
+I (11951) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (12021) main: Transmitted Write Data
+I (12091) main: Received Read Data : 11 22 33 44 55
+I (12161) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (12231) main: Transmitted Write Data
+I (12301) main: Received Read Data : 11 22 33 44 55
+I (12371) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (12441) main: Transmitted Write Data
+I (12511) main: Received Read Data : 11 22 33 44 55
+I (12581) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (12651) main: Transmitted Write Data
+I (12721) main: Received Read Data : 11 22 33 44 55
+I (12791) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (12861) main: Transmitted Write Data
+I (12931) main: Received Read Data : 11 22 33 44 55
+I (13001) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (13071) main: Transmitted Write Data
+I (13141) main: Received Read Data : 11 22 33 44 55
+I (13211) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (13281) main: Transmitted Write Data
+I (13351) main: Received Read Data : 11 22 33 44 55
+I (13421) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (13491) main: Transmitted Write Data
+I (13561) main: Received Read Data : 11 22 33 44 55
+I (13631) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (13701) main: Transmitted Write Data
+I (13771) main: Received Read Data : 11 22 33 44 55
+I (13841) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (13911) main: Transmitted Write Data
+I (13981) main: Received Read Data : 11 22 33 44 55
+I (14051) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (14121) main: Transmitted Write Data
+I (14191) main: Received Read Data : 11 22 33 44 55
+I (14261) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (14331) main: Transmitted Write Data
+I (14401) main: Received Read Data : 11 22 33 44 55
+I (14471) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (14541) main: Transmitted Write Data
+I (14611) main: Received Read Data : 11 22 33 44 55
+I (14681) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (14751) main: Transmitted Write Data
+I (14821) main: Received Read Data : 11 22 33 44 55
+I (14891) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (14961) main: Transmitted Write Data
+I (15031) main: Received Read Data : 11 22 33 44 55
+I (15101) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (15171) main: Transmitted Write Data
+I (15241) main: Received Read Data : 11 22 33 44 55
+I (15311) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (15381) main: Transmitted Write Data
+I (15451) main: Received Read Data : 11 22 33 44 55
+I (15521) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (15591) main: Transmitted Write Data
+I (15661) main: Received Read Data : 11 22 33 44 55
+I (15731) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (15801) main: Transmitted Write Data
+I (15871) main: Received Read Data : 11 22 33 44 55
+I (15941) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (16011) main: Transmitted Write Data
+I (16081) main: Received Read Data : 11 22 33 44 55
+I (16151) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (16221) main: Transmitted Write Data
+I (16291) main: Received Read Data : 11 22 33 44 55
+I (16361) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (16431) main: Transmitted Write Data
+I (16501) main: Received Read Data : 11 22 33 44 55
+I (16571) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (16641) main: Transmitted Write Data
+I (16711) main: Received Read Data : 11 22 33 44 55
+I (16781) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (16851) main: Transmitted Write Data
+I (16921) main: Received Read Data : 11 22 33 44 55
+I (16991) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (17061) main: Transmitted Write Data
+I (17131) main: Received Read Data : 11 22 33 44 55
+I (17201) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (17271) main: Transmitted Write Data
+I (17341) main: Received Read Data : 11 22 33 44 55
+I (17411) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (17481) main: Transmitted Write Data
+I (17551) main: Received Read Data : 11 22 33 44 55
+I (17621) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
+I (17691) main: Transmitted Write Data
+I (17761) main: Received Read Data : 11 22 33 44 55
+I (17831) main: Transmitted Write Data and Received Read Data : 11 22 33 44 55
